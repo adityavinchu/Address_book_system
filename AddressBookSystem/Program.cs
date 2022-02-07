@@ -10,8 +10,8 @@ namespace AddressBookSystem
     {
         static void Main(string[] args)
         {
-            AddressBook book = new AddressBook();
-            book.AddContact();
+            Contacts contacts = new Contacts();
+            contacts.NewContact();
         }
     }
 }
