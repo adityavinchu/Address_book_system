@@ -4,6 +4,14 @@
 2022-02-07 14:05:41.3725|INFO|AddressBookSystem.Nlog|New Contact Added
 2022-02-07 14:06:45.6899|INFO|AddressBookSystem.Nlog|New Contact Created
 2022-02-07 14:06:45.6899|INFO|AddressBookSystem.Nlog|New Contact Added
-2022-02-07 14:39:23.8166|INFO|AddressBookSystem.Nlog|New Contact Added in Adressbook
+2022-02-07 14:39:23.8166|INFO|AddressBookSystem.Nlog|New Contact Added
 2022-02-07 14:39:40.7264|ERROR|AddressBookSystem.Nlog|Contact not found
 
+2022-02-07 17:16:26.1030|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
+2022-02-07 17:17:01.8859|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
+2022-02-07 17:17:35.8279|ERROR|AddressBookSystem.Nlog|Contact not found
+
+2022-02-07 17:18:07.3575|INFO|AddressBookSystem.Nlog|Contact updated Successfully
+2022-02-07 17:18:21.8001|ERROR|AddressBookSystem.Nlog|Contact not found
+
+2022-02-07 17:21:07.9034|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book

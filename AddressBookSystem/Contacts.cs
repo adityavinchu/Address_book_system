@@ -18,7 +18,7 @@ namespace AddressBookSystem
                 AddressBook addressBook = new AddressBook();
                 addressBook = AddContact();
                 contact.Add(addressBook);
-                nlog.LogInfo("New Contact Added in Adressbook");
+                nlog.LogInfo("New Contact Added in Address Book");
             }
             catch (Exception ex)
             {
@@ -29,42 +29,44 @@ namespace AddressBookSystem
         public AddressBook AddContact()
         {
             AddressBook addressBook = new AddressBook();
-            Console.WriteLine("Enter the First Name");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Enter First Name");
             addressBook.FirstName = Console.ReadLine();
-            Console.WriteLine("Enter the Last Name");
+            Console.WriteLine("Enter Last Name");
             addressBook.LastName = Console.ReadLine();
-            Console.WriteLine("Enter the Address");
+            Console.WriteLine("Enter Address");
             addressBook.Address = Console.ReadLine();
-            Console.WriteLine("Enter the City");
+            Console.WriteLine("Enter City");
             addressBook.City = Console.ReadLine();
-            Console.WriteLine("Enter the State");
+            Console.WriteLine("Enter State");
             addressBook.State = Console.ReadLine();
-            Console.WriteLine("Enter the Zip");
+            Console.WriteLine("Enter Zip");
             addressBook.Zip = Console.ReadLine();
-            Console.WriteLine("Enter the PhoneNumber");
+            Console.WriteLine("Enter PhoneNumber");
             addressBook.Phonenumber = Console.ReadLine();
-            Console.WriteLine("Enter the Email");
+            Console.WriteLine("Enter Email");
             addressBook.Email = Console.ReadLine();
+            Console.WriteLine("----------------------------------");
             return addressBook;
         }
         public bool EditContact()
         {
-            Console.WriteLine("Enter The First Name");
-            string Fname = Console.ReadLine();
-            Console.WriteLine("Enter The Last Name");
-            string Lname = Console.ReadLine();
+            Console.WriteLine("Enter First Name");
+            string Firstname = Console.ReadLine();
+            Console.WriteLine("Enter Last Name");
+            string Lastname = Console.ReadLine();
 
             foreach (AddressBook addressBook in contact)
             {
-                if (addressBook.FirstName == Fname && addressBook.LastName == Lname)
+                if (addressBook.FirstName == Firstname && addressBook.LastName == Lastname)
                 {
-                    Console.WriteLine("Current Information About The Contact");
+                    Console.WriteLine("Current Information About Contact");
                     Display(addressBook);
                     AddressBook temp = new AddressBook();
                     temp = Edit(addressBook);
                     contact.Remove(addressBook);
                     contact.Add(temp);
-                    nlog.LogInfo("Contact updated");
+                    nlog.LogInfo("Contact updated Successfully");
                     return true;
                 }
             }
@@ -72,13 +74,22 @@ namespace AddressBookSystem
             return false;
 
         }
+
         public AddressBook Edit(AddressBook address)
         {
-            Console.WriteLine("Press 1 : update First Name" + "Press 2 : update Last Name" +
-                "Press 3: update Address" + "Press 4: update city" + "Press 5 : update State" +
-                "Press 6: update Zip" + "Press 7: upadte PhoneNumber" + "Press 8: update Email");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Press 1 : Update First Name");
+            Console.WriteLine("Press 2 : Update Last Name");
+            Console.WriteLine("Press 3 : Update Address");
+            Console.WriteLine("Press 4 : Update city");
+            Console.WriteLine("Press 5 : Update State");
+            Console.WriteLine("Press 6 : Update Zip");
+            Console.WriteLine("Press 7 : Update PhoneNumber");
+            Console.WriteLine("Press 8 : Update Email");
+            Console.WriteLine("----------------------------------");
+
             int n = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter the New Information");
+            Console.WriteLine("Enter New Information");
             string temp = Console.ReadLine();
             switch (n)
             {
@@ -107,13 +118,32 @@ namespace AddressBookSystem
                     address.Email = temp;
                     break;
                 default:
-                    Console.WriteLine("Choose Correct Option");
+                    Console.WriteLine("Please select Correct Option");
                     break;
             }
             return address;
         }
+        public bool DeleteContact()
+        {
+            Console.WriteLine("Enter First Name");
+            string Firstname = Console.ReadLine();
+            Console.WriteLine("Enter Last Name");
+            string Lastname = Console.ReadLine();
+
+            foreach (AddressBook addressBook in contact)
+            {
+                if (addressBook.FirstName == Firstname && addressBook.LastName == Lastname)
+                {
+                    contact.Remove(addressBook);
+                    return true;
+                }
+            }
+            nlog.LogError("Contact not found\n");
+            return false;
+        }
         public void Display(AddressBook address)
         {
+            Console.WriteLine("----------------------------------");
             Console.WriteLine("First Name :" + address.FirstName);
             Console.WriteLine("Last Name  :" + address.LastName);
             Console.WriteLine("Address    :" + address.Address);
@@ -122,14 +152,13 @@ namespace AddressBookSystem
             Console.WriteLine("Zip        :" + address.Zip);
             Console.WriteLine("Phonenumber :" + address.Phonenumber);
             Console.WriteLine("Email :" + address.Email);
+            Console.WriteLine("----------------------------------");
 
         }
         public void View()
         {
-            //   int i = 0;
             foreach (AddressBook addressBook in contact)
             {
-                ///     Console.WriteLine(i);
                 Console.WriteLine(addressBook.FirstName);
                 Display(addressBook);
             }
@@ -139,7 +168,14 @@ namespace AddressBookSystem
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("Press 1: add contact \n" + "Press 2:  Edit Contact\n" + "Press 3: view Contact\n" + "Press 4: Exit\n");
+                Console.WriteLine("--------------------------");
+                Console.WriteLine("Press 1 : Add contact");
+                Console.WriteLine("Press 2:  Edit Contact");
+                Console.WriteLine("Press 3 : View Contact");
+                Console.WriteLine("Press 4 : Delete Contact");
+                Console.WriteLine("Press 5 : Exit");
+                Console.WriteLine("--------------------------");
+
                 int n = Convert.ToInt32(Console.ReadLine());
                 switch (n)
                 {
@@ -147,14 +183,29 @@ namespace AddressBookSystem
                         NewContact();
                         break;
                     case 2:
-                        bool done = EditContact();
-                        if (done) Console.WriteLine("Contact Updated\n");
+                        bool editSuccessfully = EditContact();
+                        if (editSuccessfully)
+                        {
+                            Console.WriteLine("----------------------------------");
+                            Console.WriteLine("Contact Updated Successfully\n");
+                            Console.WriteLine("----------------------------------");
+                        }
                         else Console.WriteLine("No Record Found\n");
                         break;
                     case 3:
                         View();
                         break;
                     case 4:
+                        bool deleted = DeleteContact();
+                        if (deleted)
+                        { 
+                            Console.WriteLine("----------------------------------");
+                            Console.WriteLine("Contact Deleted Successfully\n");
+                            Console.WriteLine("----------------------------------"); 
+                        }
+                        else Console.WriteLine("No Record Found\n");
+                        break;
+                    case 5:
                         flag = false;
                         break;
 
