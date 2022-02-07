@@ -17,37 +17,5 @@ namespace AddressBookSystem
         public string Zip { get; set; }
         public string Phonenumber { get; set; }
         public string Email { get; set; }
-        public void AddContact()
-        {
-            try
-            {
-                Console.WriteLine("Enter the First Name");
-                this.FirstName = Console.ReadLine();
-                Console.WriteLine("Enter the Last Name");
-                this.LastName = Console.ReadLine();
-                Console.WriteLine("Enter the Address");
-                this.Address = Console.ReadLine();
-                Console.WriteLine("Enter the City");
-                this.City = Console.ReadLine();
-                Console.WriteLine("Enter the State");
-                this.State = Console.ReadLine();
-                Console.WriteLine("Enter the Zip");
-                this.Zip = Console.ReadLine();
-                Console.WriteLine("Enter the PhoneNumber");
-                this.Phonenumber = Console.ReadLine();
-                Console.WriteLine("Enter the Email");
-                this.Email = Console.ReadLine();
-
-                Console.WriteLine("Contact Added\n");
-                nlog.LogInfo("New Contact Created");
-
-            }
-            catch
-            {
-                nlog.LogError("Some Error Occured");
-            }
-        }
-
-
     }
 }
