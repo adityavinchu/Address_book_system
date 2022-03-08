@@ -8,11 +8,37 @@ namespace AddressBookSystem
 {
     internal class Program
     {
+        public static void Find(Dictionary<string, Contacts> phonebooks, string name)
+        {
+            List<AddressBook> list = new List<AddressBook>();
+            foreach (var contact in phonebooks)
+            {
+                list = (contact.Value.contact.FindAll(e => e.State == name | e.City == name).ToList());
+                bool ff = true;
+                foreach (AddressBook item in list)
+                {
+                    if (ff)
+                    {
+                        Console.WriteLine(contact.Key);
+                        ff = false;
+                    }
+                    Console.WriteLine(item.FirstName + " " + item.LastName);
+                }
+            }
+        }
         static void Main(string[] args)
         {
-            Contacts contacts = new Contacts();
-            contacts.Phonebook();
-
+            Dictionary<string, Contacts> Adressbooks = new Dictionary<string, Contacts>();
+            Contacts first = new Contacts("FirstUser");
+            Adressbooks.Add("FirstUser", first);
+            Contacts second = new Contacts("SecondUser");
+            Adressbooks.Add("SecondUser", second);
+            Adressbooks["FirstUser"].Phonebook();
+            Adressbooks["SecondUser"].Phonebook();
+            Console.WriteLine("Enter the city or state name by which you want to search");
+            string choice = Console.ReadLine();
+            Find(Adressbooks, choice);
+ 
         }
     }
 }

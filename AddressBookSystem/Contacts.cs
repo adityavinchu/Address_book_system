@@ -8,7 +8,12 @@ namespace AddressBookSystem
 {
     public class Contacts
     {
-        List<AddressBook> contact = new List<AddressBook>();
+        public string Addressbookname;
+        public Contacts(string name)
+        {
+            this.Addressbookname = name;
+        }
+        public List<AddressBook> contact = new List<AddressBook>();
         Nlog nlog = new Nlog();
         public void NewContact()
         {
@@ -17,6 +22,12 @@ namespace AddressBookSystem
             {
                 AddressBook addressBook = new AddressBook();
                 addressBook = AddContact();
+                bool present = Validate(addressBook.FirstName, addressBook.LastName);
+                if (present)
+                {
+                    Console.WriteLine("Username is already present in the contacts");
+                    return;
+                }
                 contact.Add(addressBook);
                 nlog.LogInfo("New Contact Added in Address Book");
             }
@@ -25,6 +36,10 @@ namespace AddressBookSystem
                 Console.WriteLine(ex);
 
             }
+        }
+        public bool Validate(string firstname, string lastname)
+        {
+            return contact.Any(x => x.FirstName == firstname && x.LastName == lastname);
         }
         public AddressBook AddContact()
         {
