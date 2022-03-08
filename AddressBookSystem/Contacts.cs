@@ -223,7 +223,6 @@ namespace AddressBookSystem
                     case 5:
                         flag = false;
                         break;
-
                 }
             }
         }
