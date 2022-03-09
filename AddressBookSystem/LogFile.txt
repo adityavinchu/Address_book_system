@@ -21,3 +21,5 @@
 2022-03-08 22:32:27.1382|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
 2022-03-08 22:33:11.0070|ERROR|AddressBookSystem.Nlog|Contact not found
 
+2022-03-09 20:03:22.0200|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
+2022-03-09 21:17:27.3215|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book

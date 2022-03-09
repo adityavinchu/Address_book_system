@@ -15,6 +15,8 @@ namespace AddressBookSystem
         }
         public List<AddressBook> contact = new List<AddressBook>();
         Nlog nlog = new Nlog();
+        private bool find;
+
         public void NewContact()
         {
             Console.WriteLine(contact.Count());
@@ -178,6 +180,36 @@ namespace AddressBookSystem
                 Display(addressBook);
             }
         }
+
+        public bool FindContact()
+        {
+            Dictionary<string, Contacts> Addressbooks = new Dictionary<string, Contacts>();
+
+            Console.WriteLine("Enter the city or state name by which you want to search");
+            string cityorstate = Console.ReadLine();
+            return Find(Addressbooks, cityorstate);
+        }
+        public bool Find(Dictionary<string, Contacts> phonebooks, string name)
+        {
+
+            List<AddressBook> list = new List<AddressBook>();
+            foreach (var contact in phonebooks)
+            {
+                list = (contact.Value.contact.FindAll(f => f.State == name | f.City == name).ToList());
+                bool find = true;
+                foreach (AddressBook item in list)
+                {
+                    if (find)
+                    {
+                        Console.WriteLine(contact.Key);
+                        find = false;
+                    }
+                    Console.WriteLine(item.FirstName + " " + item.LastName);
+                }
+            }
+            return find;
+
+        }
         public void Phonebook()
         {
             bool flag = true;
@@ -188,7 +220,8 @@ namespace AddressBookSystem
                 Console.WriteLine("Press 2:  Edit Contact");
                 Console.WriteLine("Press 3 : View Contact");
                 Console.WriteLine("Press 4 : Delete Contact");
-                Console.WriteLine("Press 5 : Exit");
+                Console.WriteLine("Press 5 : Find By City or state");
+                Console.WriteLine("Press 6 : Exit");
                 Console.WriteLine("--------------------------");
 
                 int n = Convert.ToInt32(Console.ReadLine());
@@ -221,6 +254,16 @@ namespace AddressBookSystem
                         else Console.WriteLine("No Record Found\n");
                         break;
                     case 5:
+                        bool find = FindContact();
+                        if (find)
+                        {
+                            Console.WriteLine("----------------------------------");
+                            Console.WriteLine("Contact is Present\n");
+                            Console.WriteLine("----------------------------------");
+                        }
+                        else Console.WriteLine("No Record Found\n");
+                        break;
+                    case 6:
                         flag = false;
                         break;
                 }
