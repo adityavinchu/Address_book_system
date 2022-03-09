@@ -14,13 +14,13 @@ namespace AddressBookSystem
             foreach (var contact in phonebooks)
             {
                 list = (contact.Value.contact.FindAll(e => e.State == name | e.City == name).ToList());
-                bool ff = true;
+                bool find = true;
                 foreach (AddressBook item in list)
                 {
-                    if (ff)
+                    if (find)
                     {
                         Console.WriteLine(contact.Key);
-                        ff = false;
+                        find = false;
                     }
                     Console.WriteLine(item.FirstName + " " + item.LastName);
                 }
