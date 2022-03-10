@@ -89,7 +89,6 @@ namespace AddressBookSystem
             }
             nlog.LogError("Contact not found\n");
             return false;
-
         }
 
         public AddressBook Edit(AddressBook address)
@@ -170,7 +169,6 @@ namespace AddressBookSystem
             Console.WriteLine("Phonenumber :" + address.Phonenumber);
             Console.WriteLine("Email :" + address.Email);
             Console.WriteLine("----------------------------------");
-
         }
         public void View()
         {
@@ -180,18 +178,26 @@ namespace AddressBookSystem
                 Display(addressBook);
             }
         }
-
+        public static int CountByCityorState(string name)
+        {
+            List<AddressBook> list = new List<AddressBook>();
+            int count = 0;
+            foreach (var contact in Phonebook)
+            {
+                list = (contact.Value.contact.FindAll(e => e.State == name | e.City == name).ToList());
+                count += list.Count;
+            }
+            return count;
+        }
         public bool FindContact()
         {
             Dictionary<string, Contacts> Addressbooks = new Dictionary<string, Contacts>();
-
             Console.WriteLine("Enter the city or state name by which you want to search");
             string cityorstate = Console.ReadLine();
             return Find(Addressbooks, cityorstate);
         }
         public bool Find(Dictionary<string, Contacts> phonebooks, string name)
         {
-
             List<AddressBook> list = new List<AddressBook>();
             foreach (var contact in phonebooks)
             {
@@ -208,7 +214,6 @@ namespace AddressBookSystem
                 }
             }
             return find;
-
         }
         public void Phonebook()
         {
@@ -221,6 +226,8 @@ namespace AddressBookSystem
                 Console.WriteLine("Press 3 : View Contact");
                 Console.WriteLine("Press 4 : Delete Contact");
                 Console.WriteLine("Press 5 : Find By City or state");
+                Console.WriteLine("Press 5 : Count By City or state");
+
                 Console.WriteLine("Press 6 : Exit");
                 Console.WriteLine("--------------------------");
 
@@ -264,6 +271,10 @@ namespace AddressBookSystem
                         else Console.WriteLine("No Record Found\n");
                         break;
                     case 6:
+                        int number = CountByCityorState(Phonebook);
+                        Console.WriteLine(number);
+                        break;
+                    case 7:
                         flag = false;
                         break;
                 }
