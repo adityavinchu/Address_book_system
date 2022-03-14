@@ -173,7 +173,25 @@ namespace AddressBookSystem
         }
         public void View()
         {
-            contact.Sort((emp1, emp2) => emp1.FirstName.CompareTo(emp2.FirstName));
+            Console.WriteLine("Enter option By Which you Sorted Contacts:\n");
+            Console.WriteLine("Press 1: FirstName");
+            Console.WriteLine("Press 2: City");
+            Console.WriteLine("Press 3: State");
+            Console.WriteLine("Press 4: Zip");
+            Console.WriteLine("--------------------------------------------");
+
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            if (option == 1)
+                contact.Sort((emp1, emp2) => emp1.FirstName.CompareTo(emp2.FirstName));
+            if(option == 2)
+                contact.Sort((emp1, emp2) => emp1.City.CompareTo(emp2.City));
+            if( option == 3)
+                contact.Sort((emp1, emp2) => emp1.State.CompareTo(emp2.State));
+            if(option == 4)
+                contact.Sort((emp1, emp2) => emp1.Zip.CompareTo(emp2.Zip));
+            
+            
             foreach (AddressBook addressBook in contact)
             {
                 Console.WriteLine(addressBook.FirstName);
