@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace AddressBookSystem
 {
     public class Contacts
@@ -172,6 +173,7 @@ namespace AddressBookSystem
         }
         public void View()
         {
+            contact.Sort((emp1, emp2) => emp1.FirstName.CompareTo(emp2.FirstName));
             foreach (AddressBook addressBook in contact)
             {
                 Console.WriteLine(addressBook.FirstName);
@@ -182,7 +184,6 @@ namespace AddressBookSystem
         public void FindContact(string name)
         {
             //List<AddressBook> list = new List<AddressBook>();
-
                 foreach (AddressBook contact in contact.FindAll(f => f.State == name || f.City == name).ToList())
                 {
                     count++;
@@ -251,6 +252,5 @@ namespace AddressBookSystem
                 }
             }
         }
-
     }
 }

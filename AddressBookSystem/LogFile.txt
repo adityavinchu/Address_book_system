@@ -54,3 +54,6 @@
 2022-03-13 14:14:11.9376|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
 2022-03-13 14:14:20.0332|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
 2022-03-13 14:14:25.3827|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
+2022-03-14 22:01:40.1806|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
+2022-03-14 22:01:56.9196|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
+2022-03-14 22:02:08.7104|INFO|AddressBookSystem.Nlog|New Contact Added in Address Book
