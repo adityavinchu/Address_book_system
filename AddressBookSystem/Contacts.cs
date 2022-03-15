@@ -67,6 +67,21 @@ namespace AddressBookSystem
             Console.WriteLine("----------------------------------");
             return addressBook;
         }
+        public void AddContact(string s)
+        {
+            string[] userinfo = s.Split(' ');
+            AddressBook addressBook = new AddressBook();
+            addressBook.FirstName = userinfo[0];
+            addressBook.LastName = userinfo[1];
+            addressBook.Address = userinfo[2];
+            addressBook.City = userinfo[3];
+            addressBook.State = userinfo[4];
+            addressBook.Zip = userinfo[5];
+            addressBook.Phonenumber = userinfo[6];
+            addressBook.Email = userinfo[7];
+            bool present = Validate(addressBook.FirstName, addressBook.LastName);
+            if (!present) contact.Add(addressBook);
+        }
         public bool EditContact()
         {
             Console.WriteLine("Enter First Name");
@@ -161,14 +176,14 @@ namespace AddressBookSystem
         public void Display(AddressBook address)
         {
             Console.WriteLine("----------------------------------");
-            Console.WriteLine("First Name :" + address.FirstName);
-            Console.WriteLine("Last Name  :" + address.LastName);
-            Console.WriteLine("Address    :" + address.Address);
-            Console.WriteLine("City       :" + address.City);
-            Console.WriteLine("State      :" + address.State);
-            Console.WriteLine("Zip        :" + address.Zip);
+            Console.WriteLine("First Name  :" + address.FirstName);
+            Console.WriteLine("Last Name   :" + address.LastName);
+            Console.WriteLine("Address     :" + address.Address);
+            Console.WriteLine("City        :" + address.City);
+            Console.WriteLine("State       :" + address.State);
+            Console.WriteLine("Zip         :" + address.Zip);
             Console.WriteLine("Phonenumber :" + address.Phonenumber);
-            Console.WriteLine("Email :" + address.Email);
+            Console.WriteLine("Email       :" + address.Email);
             Console.WriteLine("----------------------------------");
         }
         public void View()
@@ -219,7 +234,7 @@ namespace AddressBookSystem
             {
                 Console.WriteLine("____________________________________________________");
                 Console.WriteLine("Press 1 : Add contact                              |");
-                Console.WriteLine("Press 2:  Edit Contact                             |");
+                Console.WriteLine("Press 2 : Edit Contact                             |");
                 Console.WriteLine("Press 3 : View Contact                             |");
                 Console.WriteLine("Press 4 : Delete Contact                           |");
                 Console.WriteLine("Press 5 : Find By City or state                    |");
@@ -266,6 +281,9 @@ namespace AddressBookSystem
                         break;
                     case 6:
                         flag = false;
+                        break;
+                    default:
+                        Console.WriteLine("Enter correct Value");
                         break;
                 }
             }
