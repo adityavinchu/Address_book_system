@@ -20,7 +20,7 @@ namespace AddressBookSystem
         public int count = 0;
         public void NewContact()
         {
-            Console.WriteLine(contact.Count());
+            //Console.WriteLine(contact.Count());
             try
             {
                 AddressBook addressBook = new AddressBook();
@@ -38,6 +38,14 @@ namespace AddressBookSystem
             {
                 Console.WriteLine(ex);
 
+            }
+        }
+        public void AddContactFileOP(AddressBook addressook)
+        {
+            bool present =Validate(addressook.FirstName, addressook.LastName);
+            if (!present)
+            {
+                contact.Add(addressook);
             }
         }
         public bool Validate(string firstname, string lastname)

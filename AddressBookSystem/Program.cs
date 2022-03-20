@@ -1,47 +1,42 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
+
 namespace AddressBookSystem
 {
     internal class Program
     {
-       
+        
         public static void Main(string[] args)
         {
-            Dictionary<string, Contacts> Adressbooks = new Dictionary<string, Contacts>();
-            Contacts book = new Contacts("FirstBook");
-            Adressbooks.Add("FirstBook", book);
-            string file = @"C:\Users\Aditya\source\Address_book_system\AddressBookSystem\TextFile1.txt";
+            Dictionary<string, Contacts> Addressbooks = new Dictionary<string, Contacts>();
+            Contacts book = new Contacts("BookOne");
+            Addressbooks.Add("BookOne", book);
+            string file = @"C:\Users\Aditya\source\Address_book_system\AddressBookSystem\CsvFile.csv";
 
 
-            if (File.Exists(file))
+            using (var reader =new StreamReader(file))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                const Int32 BufferSize = 128;
-                using (var fileStream = File.OpenRead(file))
-                using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
+                var records = csv.GetRecords<AddressBook>().ToList();
+                foreach (AddressBook record in records)
                 {
-                    String line;
-                    while ((line = streamReader.ReadLine()) != null)
-                    {
-                        book.AddContact(line);
-                    }
+                    book.AddContactFileOP(record);
                 }
                 book.Phonebook();
-                string temp = "";
-                foreach (var user in book.contact)
-                {
-                    temp += user.FirstName + " " + user.LastName + " " + user.Address + " " + user.City + " " + user.State + " " + user.Zip + " " + user.Phonenumber + " " + user.Email + "\n";
-                }
-                File.WriteAllText(file, temp);
-
             }
-            else
+            using (var writer = new StreamWriter(file))
+            using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                Console.WriteLine("File Does not Exist");
+                csvExport.WriteRecords(book.contact);
             }
         }
     }
